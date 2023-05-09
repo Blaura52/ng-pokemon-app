@@ -1,32 +1,32 @@
-import { Component } from '@angular/core';
-
+import { Component, OnInit } from '@angular/core'; //import de OnInit pour initialiser notre composant
+import { POKEMONS } from './mock-pokemon-list'; //import de la liste Pokémons que j'ai ajouté précédemment depuis le fichier mock-pokemon-list
+import { Pokemon } from './pokemon';  //import de l'object Pokemon
 @Component({
   selector: 'app-root',
-  template: `
-    <!--The content below is only a placeholder and can be replaced.-->
-    <div style="text-align:center" class="content">
-      <h1>
-        Welcome to {{title}}!
-      </h1>
-      <span style="display: block">{{ title }} app is running!</span>
-      <img width="300" alt="Angular Logo" src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==">
-    </div>
-    <h2>Here are some links to help you start: </h2>
-    <ul>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/tutorial">Tour of Heroes</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://angular.io/cli">CLI Documentation</a></h2>
-      </li>
-      <li>
-        <h2><a target="_blank" rel="noopener" href="https://blog.angular.io/">Angular blog</a></h2>
-      </li>
-    </ul>
-    <router-outlet></router-outlet>
-  `,
-  styles: []
+  //1 template: `<h1>Welcome to {{title}}!</h1>` 
+  //2 template: `<h1>Welcome to {{ pokemonList[0] }}!</h1>`  Vue, affichage de la liste POKEMONS a l'index 0
+  template: `<h1>Liste de Pokémons</h1>`
 })
-export class AppComponent {
-  title = 'ng-pokemon-app';
+
+export class AppComponent implements OnInit {
+  //1 title = 'application de pokémons';  On passe un nom à notre appli
+  //2 pokemonList = ['Bulbizarre', 'Salamèche', 'Carapuce'];  On passe trois pokémons en entréé en chaine de caractères.
+  //3 pokemonList = POKEMONS;  Constante POKEMONS de l'import de la liste de POKEMONS
+  pokemonList: Pokemon[] = POKEMONS; //On type notre propriété pokemonList en disant que c'est un tableau de pokémons, l'utilisateur devra obligatoirement lui passer une liste de pokémons avec des identifiants, point d evie etc..
+
+  //constructor() {
+  //   this.pokemonList = []; ❌ très déconseillé de déclarer une variable dans le constructor
+  // }
+
+  ngOnInit() { // ou ngOnInit(): void{}, pas obliger de mettre void
+    console.table(this.pokemonList);
+    //2 this.selectPokemon('Bulbizarre'); la méthode permet d'afficher une chaine de caractère
+    this.selectPokemon(this.pokemonList[0]); // on ne veut plus une chaine de caractère, mais un object métier Pokemon car en ayant changé le paramètre de la méthode selectPokemon  on ne respecte plus le contrat d'interface
+  }
+
+  //2 selectPokemon(pokemonName: string) { le paramètre de la méthode est une chaine de caractère définit juste en dessous
+    selectPokemon(pokemon: Pokemon) { //comme paramètre on type la propriété avec un objet métier Pokemon 
+    //2 console.log(`Vous avez cliqué sur le pokémon ${pokemonName} propriété d'avant pour récuper le nom en chaine de caractère
+      console.log(`Vous avez cliqué sur le pokémon ${pokemon.name}`); //on récupère la proprièté .name grâce à l'objet pokemon
+  }
 }
