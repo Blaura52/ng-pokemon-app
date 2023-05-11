@@ -1,0 +1,22 @@
+<h1>Liste de Pokémons</h1>
+<!-- variable input directement déclarée dans le template grâce à la dièze #-->
+<input type="number"
+        #input
+        (keyup)="selectPokemon(input.value)"
+        aria-label="search"
+/>     
+<p>{{ pokemonSelected?.name }}</p> <!-- On rajoute l'opérateur ? pour dire à Angular de ne rien afficher dans la console plutot que de renvoyer une erreur. Car c'est parce que notre composant pokemonSelected n'est pas définit à l'initialisation, donc il mets undefined et nous on demande la propriété.name à undefined -->
+
+<p>{{ pokemonList[0].name }}</p>
+<p>{{ pokemonList[1].name  }}</p>
+<p>{{ pokemonList[2].name  }}</p>
+<p>{{ pokemonList[3].name  }}</p>
+<p>{{ pokemonList[4].name  }}</p>
+<p>{{ pokemonList[5].name  }}</p>
+<p>{{ pokemonList[6].name  }}</p>
+<p>{{ pokemonList[7].name  }}</p>
+<p>{{ pokemonList[8].name  }}</p>
+<p>{{ pokemonList[9].name  }}</p>
+<p>{{ pokemonList[10].name  }}</p>
+<p>{{ pokemonList[11].name  }}</p>
+<!-- c'est grâce à la syntaxe d'interpolation(.name), que Angular pousse les valeurs de ma propriété vers le template -->
