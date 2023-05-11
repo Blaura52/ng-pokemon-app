@@ -1,0 +1,30 @@
+<h1>Liste de Pokémons</h1>
+<!--1 le champs input est de type text et quand on clique dessus on veut remonter le pokemon sur lequel on a cliqué grâce à l'évènement click et la méthode selectPokemon()-->
+<!-- variable input directement déclarée dans le template grâce à la dièze #-->
+<input type="number"
+        #input
+        (keyup)="selectPokemon(input.value)"
+        aria-label="search"
+/>     
+<!--1 (click)="selectPokemon($event)" on passe directement l'evenement passer par le DOM et en Angular on utilise la synthaxe $event-->
+<!--1 on change le type="number" de notre input pour le mettre en text -->
+<!--2 (keyup)="0" devient (keyup)="selectPokemon(input.value)" on récupère directement la chaine de caractere avec l'index que vient de saisir l'utilisateur -->
+
+<!--1 <p>{{ input.value }}</p>  On va pouvoir directement accéder à l'élément #input sans avoir à caster grâce à l'interpolation avec le contenu tapé par l'utilisateur-->
+<!--2 <p>{{ pokemonSelected.name }}</p> -->
+<p>{{ pokemonSelected?.name }}</p> <!--2 On rajoute l'opérateur ? pour dire à Angular de ne rien afficher dans la console plutot que de renvoyer une erreur. Car c'est parce que notre composant pokemonSelected n'est pas définit à l'initialisation, donc il mets undefined et nous on demande la propriété.name à undefined -->
+
+<!--1 <p (click)="selectPokemon(pokemonList[0])">{{ pokemonList[0].name }}</p>  Quand l'utilisateur clique sur le premier pokémon (on le détecte grâce au click) on fait éxécuter la méthode selectPokémon sur le Pokemon à l'index 0 -->
+<p>{{ pokemonList[0].name }}</p>
+<p>{{ pokemonList[1].name  }}</p>
+<p>{{ pokemonList[2].name  }}</p>
+<p>{{ pokemonList[3].name  }}</p>
+<p>{{ pokemonList[4].name  }}</p>
+<p>{{ pokemonList[5].name  }}</p>
+<p>{{ pokemonList[6].name  }}</p>
+<p>{{ pokemonList[7].name  }}</p>
+<p>{{ pokemonList[8].name  }}</p>
+<p>{{ pokemonList[9].name  }}</p>
+<p>{{ pokemonList[10].name  }}</p>
+<p>{{ pokemonList[11].name  }}</p>
+    <!-- c'est grâce à la syntaxe d'interpolation(.name), que Angular pousse les valeurs de ma propriété vers le template -->
