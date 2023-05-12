@@ -1,0 +1,36 @@
+<h1 class="center">Liste de Pokémons</h1> <!--2 class "center" de Materialize pour centrer le titre -->
+<!-- variable input directement déclarée dans le template grâce à la dièze #-->
+
+<div class="container"> <!--2 class "container" de Materialize pour centraliser le contenu de ma page dans un élément géré par Materialize -->
+        <div class="row"> <!--2 création d'une ligne ou "row" qui permet que tout les éléments à l'intérieur s'ajuste à la taille de la page grâge au responsive de Materialize  -->
+                <div *ngFor="let pokemon of pokemonList" class="col m4 s6"> <!--2 Itération sur mes pokémons en leur attribuant à chacun une petite place dans la ligne fournie par Materialize. (12/4=3, m4 pour 3 pokémons par ligne sur un écran médium et 12/6=2, s6 pour 2pokémons par ligne sur un écran small--> 
+                        <div class="card horizontal" (click)="selectPokemon(pokemon.id)" pkmnBorderCard="#Ff0000"> <!--2 création de la fameuse logique de la carte dans laquelle sera affiché mon pokémon. on remplce le p par le div car plus précis et à l'intérieur de ma colonne je créé une carte horizontal 
+                                // dans un 2eme temps on mets une valeur personnalisée a pkmnBorderCard, ici c'est rouge en hexa decimal car red ne fonctionne pas-->
+                                <div class="card-image"> <!--2 définition d'une image à gauche, déjà construit en CSS par Materialize -->
+                                        <img [src]="pokemon.picture" title="img"/> <!--2 création d'une image, elle aura comme propriété [src] et le pokemon courant .picture. on utilise la synthaxe des crochets pour lier l'attribut [src] de mon image à la .picture du pokémon qui me vient de *NgFor-->
+                                </div>
+                                <div class="card-stacked">
+                                        <div class="card-content">
+                                                <p>{{ pokemon.name }}</p> <!--2 nom de pokémon grace à la propriété .name -->
+                                                <p><small>{{ pokemon.created}}</small></p> <!--2 date de création du pokémon grace à la propriété .created -->
+                                        </div>
+                                </div>
+                        </div>
+                </div> 
+         </div> 
+</div>
+
+<!--2 Suppression de la logique du champ de recherche car on ne veut plus qu'une liste de pokémons sous forme de petites cartes. -->
+<!--1 on ajoute juste .enter au niveau de l'interception de notre évènement   (keyup.enter)="selectPokemon(input.value)" 
+<p *ngIf="pokemonSelected">
+        Vous avez sélectionné le pokémon : {{ pokemonSelected?.name }}
+</p> On rajoute l'opérateur ? pour dire à Angular de ne rien afficher dans la console plutot que de renvoyer une erreur. Car c'est parce que notre composant pokemonSelected n'est pas définit à l'initialisation, donc il mets undefined et nous on demande la propriété.name à undefined
+<p *ngIf="!pokemonSelected">
+        Aucun pokémon n'a été trouvé.
+</p> On rajoute l'opérateur ! pour dire à Angular d'afficher ce message quand il n'y a pas de pokémon trouvé -->
+
+<!--2 <input type="number"
+        #input
+        (keyup.enter)="selectPokemon(input.value)"
+        aria-label="search"
+/>   -->
