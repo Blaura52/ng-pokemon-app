@@ -1,26 +1,3 @@
 <h1 class="center">Liste de Pokémons</h1>
 
-<div class="container">
-        <div class="row">
-                <div *ngFor="let pokemon of pokemonList" class="col m4 s6"> 
-                        <div class="card horizontal" (click)="selectPokemon(pokemon.id)" pkmnBorderCard="#Ff0000">
-                                <div class="card-image">
-                                        <img [src]="pokemon.picture" title="img"/>
-                                </div>
-                                <div class="card-stacked">
-                                        <div class="card-content">
-                                                <p>{{ pokemon.name }}</p>
-                                                <p><small>{{ pokemon.created |date:"dd/MM/yyyy" }}</small></p> <!-- DatePipe et UpperCasePipe sont appliqués ici pour formater la date, la rendre plus lisible -->
-                                                <span 
-                                                        *ngFor="let type of pokemon.types" 
-                                                        class="{{ type | pokemonTypeColor }}"
-                                                >
-                                                         {{ type }}
-                                                </span>
-                                        </div>
-                                </div>
-                        </div>
-                </div> 
-         </div> 
-</div>
- 
+<router-outlet></router-outlet> <!-- c'est ici, à la place de router-outlet, qu'est injecté le template des composants selon ce qui est tapé dans l'URL par l'utilisateur -->
