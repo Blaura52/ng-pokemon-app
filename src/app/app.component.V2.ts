@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core'; //import de OnInit pour initialiser notre composant
-import { POKEMONS } from './mock-pokemon-list'; //import de la liste Pokémons que j'ai ajouté précédemment depuis le fichier mock-pokemon-list
-import { Pokemon } from './pokemon';  //import de l'object Pokemon
+import { POKEMONS } from './pokemon/mock-pokemon-list'; //import de la liste Pokémons que j'ai ajouté précédemment depuis le fichier mock-pokemon-list
+import { Pokemon } from './pokemon/pokemon';  //import de l'object Pokemon
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html' 
