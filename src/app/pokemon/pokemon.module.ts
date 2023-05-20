@@ -6,25 +6,30 @@ import { BorderCardDirective } from './border-card.directive';
 import { PokemonTypeColorPipe } from './pokemon-type-color.pipe';
 import { RouterModule, Routes } from '@angular/router';
 import { PokemonService } from './pokemon.service';
+import { FormsModule } from '@angular/forms';
+import { PokemonFormComponent } from './pokemon-form/pokemon-form.component';
+import { EditPokemonComponent } from './edit-pokemon/edit-pokemon.component';
 
-// Angular lit les routes de heut en bas donc toujours mettre les routes les plus spécifiques au début en haut et les plus globales à la fin en bas. Si par contre il y a l'opérateur ** en chemin de route, il sera LE DERNIER par mesure de prudence, voir commentaire sur sa déclaration de route plus bas
 const pokemonRoutes: Routes = [
-  { path: 'pokemons', component: ListPokemonComponent }, //route vers la liste des pokémons
-  { path: 'pokemon/:id', component: DetailPokemonComponent }, //route vers la fiche détail du pokémon, c'est pour ça qu'on lui passe une propriété apres le /pokemon/ qui est de type identifiant pour pouvoir récuper le bon pokémon avec le bon identifant
+  { path: 'edit/pokemon/:id', component: EditPokemonComponent },
+  { path: 'pokemon/:id', component: DetailPokemonComponent },
+  { path: 'pokemons', component: ListPokemonComponent },
 ];
-
 @NgModule({
   declarations: [
     ListPokemonComponent,
     DetailPokemonComponent,
     BorderCardDirective,
-    PokemonTypeColorPipe
+    PokemonTypeColorPipe,
+    PokemonFormComponent,
+    EditPokemonComponent
   ],
   imports: [
     CommonModule,
-    RouterModule.forChild(pokemonRoutes) //je me sers du routeur Angular, je lui ajoute des routes grâce à .forChild, mes routes passeront dedans
+    FormsModule, // pour l'injection des directives NgForm et NgModule pour les formulaires
+    RouterModule.forChild(pokemonRoutes)
   ],
-  providers:[PokemonService] //ajout de ce providers pour cnetraliser le pokemon service dans le pokemon service et arreter d'utiliser l'injecteur racine
+  providers:[PokemonService]
 })
 export class PokemonModule { }
  

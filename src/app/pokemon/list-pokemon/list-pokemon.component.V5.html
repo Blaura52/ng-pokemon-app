@@ -1,14 +1,15 @@
-<div class="container">
+<!-- Tout ce template était avant dans le composant racine app-component.html mais avec la création du template list-pokemon.component.html, il n'a plus de raison d'y être, nous l'avons donc exporté ici -->
+<!-- <div class="container">
     <div class="row">
             <div *ngFor="let pokemon of pokemonList" class="col m4 s6"> 
-                    <div (click)="goToPokemon(pokemon)" class="card horizontal" pkmnBorderCard="#Ff0000">
+                    <div (click)="goToPokemon(pokemon)" class="card horizontal" pkmnBorderCard="#Ff0000">- <div class="card horizontal" (click)="selectPokemon(pokemon.id)" pkmnBorderCard="#Ff0000"></div> 
                             <div class="card-image">
-                                    <img [src]="pokemon.picture" title="img"/>
+                                    <img [src]="pokemon.picture" title="img"/>manque title=""
                             </div>
                             <div class="card-stacked"> 
                                     <div class="card-content">
                                             <p>{{ pokemon.name }}</p>
-                                            <p><small>{{ pokemon.created |date:"dd/MM/yyyy" }}</small></p>
+                                            <p><small>{{ pokemon.created |date:"dd/MM/yyyy" }}</small></p>  DatePipe et UpperCasePipe sont appliqués ici pour formater la date, la rendre plus lisible 
                                             <span 
                                                     *ngFor="let type of pokemon.types" 
                                                     class="{{ type | pokemonTypeColor }}"
@@ -20,4 +21,4 @@
                     </div>
             </div> 
      </div> 
-</div>
+</div> -->
