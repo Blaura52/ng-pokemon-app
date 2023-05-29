@@ -37,6 +37,7 @@
         <div class="card-action">
           <a (click)="goToPokemonList()">Retour</a>
           <a (click)="goToEditPokemon(pokemon)">Editer</a> <!-- on rajoute le bouton éditer pour pouvoir accéder au formulaire dédition d'un pokémon-->
+          <a (click)="deletePokemon(pokemon)">Supprimer</a> <!-- on rajoute le bouton Supprimer pour pouvoir supprimer un pokémon d'un serveur, on passe par l'évènement click qui passe par la méthode deletePokemon dans detail-pokemon.component.ts qui passe lui même par la méthode deletePokemonById situé dans pokemon.service.ts-->
         </div>
       </div>
     </div>
