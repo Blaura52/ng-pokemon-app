@@ -50,7 +50,16 @@ export class PokemonFormComponent implements OnInit {
   }
 
   onSubmit() { //méthode pour la validation du type
-    console.log('Submit form !'); //on affiche un message dans la console en disant que le formulaire a été soumit
-    this.router.navigate(['/pokemon', this.pokemon.id]); //je passe un tableau, d'abord on mets l'URL vers lequel on redirige l'utilisateur et ensuite l'identifiant du pokemon courant
+    //2 console.log('Submit form !'); //on affiche un message dans la console en disant que le formulaire a été soumit
+    //2 this.router.navigate(['/pokemon', this.pokemon.id]); //je passe un tableau, d'abord on mets l'URL vers lequel on redirige l'utilisateur et ensuite l'identifiant du pokemon courant
+    
+    //3 this.pokemonService.updatePokemon(this.pokemon) 
+    //  .subscribe((pokemon) => {  //2 je n'avais plus besoin de console.log, au lieu d'afficher juste un message en cas de succes je veux rediriger l'utilisateur à la page du pokémon qu'il vient d'éditer et subscribe permet de m'abonner et regarder les flux qui arrive pour dans le cas où il y est un pokémon
+    //    if(pokemon) {    //2 si il y a un pokémon alors
+    //      this.router.navigate(['/pokemon', pokemon.id]); //on redirige l'utilisateur vers la page du pokémon en question
+    //    }
+
+    this.pokemonService.updatePokemon(this.pokemon) //3 notre API Rest ne renvoit pas de pokemon ou undefined mais null donc on doit d'adapter c'est pour ça que la façon juste au dessus, avec le pokemon en parmametre de la méthose subscribe, ne convient plus car on ne récupère plus un pokémon.
+    .subscribe(() => this.router.navigate(['/pokemon', this.pokemon.id])); //4 dans ma méthode subscribe j'ai passé une fonction qui est la fonction dans le cas où tout va bien où il n'y a pas d'erreur, on pourrait ajouter une seconde fonction en cas d'erreur
   }
 }
