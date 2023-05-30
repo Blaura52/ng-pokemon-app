@@ -11,6 +11,7 @@ import { Router } from '@angular/router';
 export class PokemonFormComponent implements OnInit {
   @Input() pokemon: Pokemon; //lorsqu'on veut utiliser 'app-pokemon-form' on doit lui passer une propriété d'entrée qui sera un pokémon
   types: string[]; //propriété qui contient un tableau de tout les types dispo dans l'appli
+  isAddForm: boolean;
 
   constructor(
     private pokemonService: PokemonService, //injection de mon PokemonService pour initialiser ngOnInit()
@@ -19,6 +20,7 @@ export class PokemonFormComponent implements OnInit {
 
   ngOnInit() { //méthode pour avoir la liste des types de pokémons
     this.types = this.pokemonService.getPokemonTypeList();
+    this.isAddForm = this.router.url.includes('add'); //je mets ma propriété isAddForm à true seulement si le router à comme url, ici, quelque chose qui inclut le terme add
   }
 
   hasType(type: string): boolean { //méthode pour savoir si le pokémon possède déjà ou non le type passé en paramètre
@@ -59,7 +61,16 @@ export class PokemonFormComponent implements OnInit {
     //      this.router.navigate(['/pokemon', pokemon.id]); //on redirige l'utilisateur vers la page du pokémon en question
     //    }
 
-    this.pokemonService.updatePokemon(this.pokemon) //3 notre API Rest ne renvoit pas de pokemon ou undefined mais null donc on doit d'adapter c'est pour ça que la façon juste au dessus, avec le pokemon en parmametre de la méthose subscribe, ne convient plus car on ne récupère plus un pokémon.
-    .subscribe(() => this.router.navigate(['/pokemon', this.pokemon.id])); //4 dans ma méthode subscribe j'ai passé une fonction qui est la fonction dans le cas où tout va bien où il n'y a pas d'erreur, on pourrait ajouter une seconde fonction en cas d'erreur
+    //5 this.pokemonService.updatePokemon(this.pokemon) //3 notre API Rest ne renvoit pas de pokemon ou undefined mais null donc on doit d'adapter c'est pour ça que la façon juste au dessus, avec le pokemon en parmametre de la méthose subscribe, ne convient plus car on ne récupère plus un pokémon.
+    //  .subscribe(() => this.router.navigate(['/pokemon', this.pokemon.id])); //4 dans ma méthode subscribe j'ai passé une fonction qui est la fonction dans le cas où tout va bien où il n'y a pas d'erreur, on pourrait ajouter une seconde fonction en cas d'erreur
+    
+    if(this.isAddForm) { //5 si isAddForm est true c'est à dire qu'il y a add en terme dans l'url recue
+      this.pokemonService.addPokemon(this.pokemon) //5 on ajoute le pokemon, on crée un nouveau pokemon
+        .subscribe((pokemon: Pokemon) => this.router.navigate(['/pokemon', pokemon.id])); //5 on souscrit à ce service avec en paramètre notre pokemon courant, qu'on passe au routeur avec l'url pokemon et l'identifiant du pokémon donné par le serveur, uniquement par le serveur même en front end. L'id vient du serveur lorsqu'on ajoute un nouveau pokémon
+      } else { //5 sinon
+      this.pokemonService.updatePokemon(this.pokemon) //5  on modifit on édite le pokemon
+        .subscribe(() => this.router.navigate(['/pokemon', this.pokemon.id])); //5 et on redirige vers sa page de detail avec un id mais deja predefinit, existant
+
+    }
   }
 }

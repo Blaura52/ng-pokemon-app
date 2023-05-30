@@ -25,7 +25,20 @@
             <!-- On va pouvoir binder (lier) la propriété hidden et l'élément qui va afficher le message d'erreur à l'utilisateur pour pouvoir le cacher, masquer-->
             <!-- avec [hidden]="name.valid on dit que si le champ du formulaire représenté par ngModel et attribué à #name est valide on masque l'élément en dessous ou alors || on va attendre que l'utilisateur intéragisse avec le champ au moins une fois grâce à .pristine pour afficher l'élément qui lui afficher le message d'erreur-->
           </div>
-    
+
+           <!-- Pokemon picture -->
+           <div *ngIf="isAddForm" class="form-group"> <!-- on crée un champ pour pouvoir choisir et définir une URL pour l'image d'un pokémon, mais avec la directive structurelle *ngIf on vérifie la propriété isAddForm, le champ ne sera visible que si isAddForm est true-->
+            <label for="picture">Image</label>
+            <input type="url" class="form-control" id="picture" 
+                    required
+                   [(ngModel)]="pokemon.picture" name="picture"
+                   #picture="ngModel">
+            <div [hidden]="picture.valid || picture.pristine" 
+                  class="card-panel red accent-1">
+                  L'image du pokémon est requise.
+            </div>
+          </div>
+     
           <!-- Pokemon hp -->
           <div class="form-group">
             <label for="hp">Point de vie</label>

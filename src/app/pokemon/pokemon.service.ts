@@ -54,6 +54,18 @@ export class PokemonService {
     ); 
   }
 
+  //8 addPokemon(pokemon: Pokemon): Observable<null> { //7 on va ajouter un nouveau pokémon au serveur. Donc on crée cette méthode pour gérer cette logique. On part du principe que le serveur nous renverra rien, on va ajouter un pokémon mais le serveur nous renverra pas forcément un objet pokémon tel qu'on lui a envoyé. Presque tout est reprit de la méthode updatePokemon car en soit il n'a que le verbe http qui change.
+  addPokemon(pokemon: Pokemon): Observable<Pokemon> { //7 on retourne le nouveau pokémon qui a été ajouté et plus null comme avant
+    const httpOptions = {
+      headers: new HttpHeaders({ 'Content-type': 'application/json' })
+    };
+    //7 return this.http.post('api/pokemon', pokemon, httpOptions).pipe( //7 on utilise le verbe http post pour ajouter un nouveau pokémon au serveur
+    return this.http.post<Pokemon>('api/pokemons', pokemon, httpOptions).pipe( //7 on caste le type de retour en Pokemon, c'est à dire je dits cette méthode ('api/pokemon', pokemon, httpOptions) va me retourner un objet de type Pokemon
+      tap((response) => this.log(response)), 
+      catchError((error) => this.handleError(error, null))
+    )
+  }
+
   deletePokemonById(pokemonId: number): Observable<null> { //6 on crée une méthode pour supprimer un pokémon appelée delatePokemonById qui prends en paramètre un pokemonId de type number (l'identification du pokemon) et en paramètre de sortie nous savons pas trop ce que nous aurons donc on mets un flux, un Observable null
     return this.http.delete(`api/pokemons/${pokemonId}`).pipe( //6 dans notre retour sur ce pokemonId on utilise notre client Http, puis le verbe HTTP delete avec en URL, l'URL de l'API plus l'identifant du pokémon que l'utilisateur veut supprimer. Ensuite on appel pipe qui nous permet d'utiliser tap et catchError
       tap((response) => this.log(response)), //6 tap est l'équivalent d'un console.log() adapté à un Observable, il n'intervient pas sur la requête il peut venir simplement faire de petite opérations à chaque fois qu'il y a une nouvelle réponse qui est apportée. Il transmet la reponse à la méthode log qui prends en paramètre response et affiche un console.table(response);.
