@@ -1,0 +1,11 @@
+/* On affiche une bordure verte à gauche si un champ est requis et valide. On ne l'applique que sur le champ nom, points de vie et dégâts, 
+avec l'élément required (car on ne veut pas des bandeaux verts à gauche sur toutes nos checkboxs types.*/
+/* .ng-valid[required] {
+    border-left: 5px solid #42A948; 
+} */
+/* On affiche une bordure rouge à gauche pour les éléments invalides qui ne sont pas des éléments de type form, c'est à dire tout les champs input, select etc... 
+Dans le ca soù il y a une erreur on veut vraiment préciser à l'utilisateur qu'il y a quelque chose qui se passe mais pas bien. Si on a une erreur, 
+Angular va en déduire que tout le formulaire est invalide avec une bordure rouge sur l'ensemble du formulaire alors qu'on veut le champ invalid précis où il y a l'erreur grâce à :not(form).*/
+/* .ng-invalid:not(form) {
+    border-left: 5px solid #A94442;
+} */

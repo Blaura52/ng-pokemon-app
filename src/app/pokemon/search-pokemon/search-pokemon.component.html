@@ -1,0 +1,35 @@
+<div class="row">
+    <div class="col s12 m6 offset-m3">
+        <div class="card">
+            <div class="card-content">
+                <div class="input-field"> <!-- pour préparer notre champ de recherche-->
+                    <input 
+                        #searchBox 
+                        (keyup)="search(searchBox.value)"
+                        placeholder="Rechercher un pokémon"
+                    />
+                    <!-- #searchBox: déclaration de mon champ de recherche, c'est ici que l'utilisateur va venir taper ses recherches
+                         à chaque fois qu'il tape une recherche on va appeler la méthode search() pour pousser le terme qui vient d'être taper. 
+                         Et on récupère ça en utilisant une variable référencée dans le template, c'est à dire que si on appel input #searchBox, 
+                         pour récupérer la valeur courante de ce champ à chaque fois que l'utilisateur tape une touche, tout ce que j'ai à faire c'est searchBox.value 
+                         et on mets un placeholder pour dire à l'utilisateur ce qu'il doit faire car dans un 1er temps ce champ sera vide-->
+                    <div class="collection"> 
+                        <a 
+                            *ngFor="let pokemon of pokemons$ | async"
+                            (click)="goToDetail(pokemon)"
+                            class="collection-item"
+                        >
+                            {{ pokemon.name}}
+                        </a>
+                        <!-- avec la directive *ngFor on va afficher une liste de liens qui correspondent à des pokémons qui ont été remontés en résultat de la recherche
+                        de l'utilisateur et ce seront des liens car quand l'utilisateur sera dessus et cliquera on le redirigera vers le pokémon correspondant. Le dollar $ à la
+                        fin de pokemons$ est une convention qui permet d'indiquer que pokemons est un Observable, c'est à dire un flux de données.
+                        Mais on veut aussi afficher leur nom du coup quand l'utilisateur cliquera sur un pokémon, on appelle la méthode goToDetail pour le rediriger vers la page 
+                        du pokémon sur lequel il a cliquer. Donc on binde sur l'évènement click et on appelle goToDetail avec le pokémon à l'intérieur.
+                        Et collection-item est une classe Materialize pour rendre l'interface plus jolie-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
