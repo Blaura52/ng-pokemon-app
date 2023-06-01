@@ -1,9 +1,9 @@
-<div *ngIf="pokemon" class="row">
+<!-- <div *ngIf="pokemon" class="row">
     <div class="col s12 m8 offset-m2">
     <h2 class="header center">{{ pokemon.name }}</h2>
     <div class="card horizontal hoverable">
       <div class="card-image">
-        <img [src]="pokemon.picture" title="img">
+        <img [src]="pokemon.picture" title="img"> manque title=""
       </div>
       <div class="card-stacked">
         <div class="card-content">
@@ -36,15 +36,12 @@
         </div>
         <div class="card-action">
           <a (click)="goToPokemonList()">Retour</a>
-          <a (click)="goToEditPokemon(pokemon)">Editer</a>
-          <a (click)="deletePokemon(pokemon)">Supprimer</a>
+          <a (click)="goToEditPokemon(pokemon)">Editer</a> on rajoute le bouton éditer pour pouvoir accéder au formulaire dédition d'un pokémon
+          <a (click)="deletePokemon(pokemon)">Supprimer</a>  on rajoute le bouton Supprimer pour pouvoir supprimer un pokémon d'un serveur, on passe par l'évènement click qui passe par la méthode deletePokemon dans detail-pokemon.component.ts qui passe lui même par la méthode deletePokemonById situé dans pokemon.service.ts
         </div>
       </div>
     </div>
     </div>
 </div>
-<!-- <h4 *ngIf='!pokemon' class="center">Aucun pokémon à afficher !</h4> -->
-<h4 *ngIf='!pokemon' class="center">
-  <app-loader></app-loader> <!-- icon de chargement qui remplace le message Auncun pokémon à afficher-->
-</h4>
-
+<h4 *ngIf='!pokemon' class="center">Aucun pokémon à afficher !</h4>
+ -->
