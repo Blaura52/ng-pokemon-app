@@ -7,8 +7,10 @@ import { HttpClientInMemoryWebApiModule } from 'angular-in-memory-web-api';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
-import { PokemonModule } from './pokemon/pokemon.module';
+import { PokemonModule } from './pokemon/pokemon- routing.module';
 import { InMemoryDataService } from './in-memory-data.service';
+import { LoginComponent } from './login/login.component';
+
 @NgModule({
   imports: [ 
     BrowserModule,
@@ -20,7 +22,7 @@ import { InMemoryDataService } from './in-memory-data.service';
   ],
   declarations: [
     AppComponent, 
-    PageNotFoundComponent],
+    PageNotFoundComponent, LoginComponent],
   providers: [],
   bootstrap: [AppComponent]
 })
