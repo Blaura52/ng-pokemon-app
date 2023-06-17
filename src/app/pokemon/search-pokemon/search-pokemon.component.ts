@@ -33,13 +33,16 @@ export class SearchPokemonComponent implements OnInit{
       // concatMap / mergeMap / SwitchMap
       // on choisi SwitchMap (comme dans une majorité des cas) qui nous permet que à chaque fois que l'utilisateur va lancer une nouvelle recherche, nous (RxJS) allons annuler la dernière recherche si elle est déjà en cours et venir effectuer uniquement la recherche la plus récente que l'utilsateur pourra demander.  
       switchMap((term) => this.pokemonService.searchPokemonList(term))
-
       );
   }
 
   search(term: string) { //méthode search qui va prendre en paramètre un terme et elle est chargée de renvoyer les termes de recherches demandés par l'utilisateur. On va obtenir un flux dans le temps des recherches de l'utilisateur
     this.searchTerms.next(term); //searchTerms nous permet de construire le flux de données et de pousser des données dans notre flux à chaque fois que l'utilisateur fait une recherche interne, on va prendre notre Subject dans searchTerms et on va venir utiliser next pour pousser le terme de recherche qu'il a tapé. next c'est un peu comme la méthode push pour un tableau, ou pour ajouter un nouvel élément à la fin du tableau, c'est exactement pareil mais avec un flux de données.
   }
+  // search(term: HTMLElement) { 
+  //   this.searchTerms.next(term); 
+  //   term.setAttribute("disabled", "true");
+  // }
 
   goToDetail(pokemon: Pokemon) { //méthode qui permet d'accéder à un pokémon de la barre de recherche
     const link = ['/pokemon', pokemon.id]; //on déclare notre lien pour notre redirection, avec l'id du pokémon cliqué dans la barre de recherche
